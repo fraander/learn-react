@@ -3,11 +3,12 @@
 // import { Inter } from 'next/font/google'
 
 import Gallery from "./qcomps/state";
+import Form from "./qcomps/stuckForm";
 
 export default function Home() {
   return (
     <div>
-      <Gallery />
+      <Form />
     </div>
   )
 }
