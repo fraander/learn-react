@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import { sculptureList } from '../../data/data.js';
+/* eslint-disable @next/next/no-img-element */
+import { useState } from "react";
+import { sculptureList } from "../../data/data.js";
 
 export default function Gallery() {
   const [index, setIndex] = useState(0);
   const [showMore, setShowMore] = useState(false);
 
   function handleNextClick() {
-    setIndex(index + 1);
+    setIndex((index + 1) % 12);
   }
 
   function handleMoreClick() {
@@ -16,9 +17,7 @@ export default function Gallery() {
   let sculpture = sculptureList[index];
   return (
     <>
-      <button onClick={handleNextClick}>
-        Next
-      </button>
+      <button onClick={handleNextClick}>Next</button>
       <h2>
         <i>{sculpture.name} </i>
         by {sculpture.artist}
@@ -27,13 +26,11 @@ export default function Gallery() {
         ({index + 1} of {sculptureList.length})
       </h3>
       <button onClick={handleMoreClick}>
-        {showMore ? 'Hide' : 'Show'} details
+        {showMore ? "Hide" : "Show"} details
       </button>
-      {showMore && <p>{sculpture.description}</p>}
-      <img
-        src={sculpture.url}
-        alt={sculpture.alt}
-      />
+      {showMore ? <p>{sculpture.description}</p> : <br/>}
+      <br />
+      <img src={sculpture.url} alt={sculpture.alt} />
     </>
   );
 }
