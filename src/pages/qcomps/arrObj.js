@@ -1,34 +1,32 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 let nextId = 3;
 const initialList = [
-  { id: 0, title: 'Big Bellies', seen: false },
-  { id: 1, title: 'Lunar Landscape', seen: false },
-  { id: 2, title: 'Terracotta Army', seen: true },
+  { id: 0, title: "Big Bellies", seen: false },
+  { id: 1, title: "Lunar Landscape", seen: false },
+  { id: 2, title: "Terracotta Army", seen: true },
 ];
 
 export default function BucketList() {
-  const [myList, setMyList] = useState(initialList);
-  const [yourList, setYourList] = useState(
-    initialList
-  );
+  const [myList, setMyList] = useState(initialList.map((i) => i));
+  const [yourList, setYourList] = useState(initialList.map((i) => i));
 
   function handleToggleMyList(artworkId, nextSeen) {
-    const tmpList = myList.map(e => {
-        if (e.id === artworkId) {
-            e.seen = nextSeen
-        }
-        return e
+    const tmpList = myList.map((e) => {
+      if (e.id === artworkId) {
+        return { ...e, seen: nextSeen };
+      }
+      return e;
     });
     setMyList(tmpList);
   }
 
   function handleToggleYourList(artworkId, nextSeen) {
-    const tmpList = yourList.map(e => {
-        if (e.id === artworkId) {
-            e.seen = nextSeen
-        }
-        return e
+    const tmpList = yourList.map((e) => {
+      if (e.id === artworkId) {
+        return { ...e, seen: nextSeen };
+      }
+      return e;
     });
     setYourList(tmpList);
   }
@@ -37,13 +35,9 @@ export default function BucketList() {
     <>
       <h1>Art Bucket List</h1>
       <h2>My list of art to see:</h2>
-      <ItemList
-        artworks={myList}
-        onToggle={handleToggleMyList} />
+      <ItemList artworks={myList} onToggle={handleToggleMyList} />
       <h2>Your list of art to see:</h2>
-      <ItemList
-        artworks={yourList}
-        onToggle={handleToggleYourList} />
+      <ItemList artworks={yourList} onToggle={handleToggleYourList} />
     </>
   );
 }
@@ -51,17 +45,14 @@ export default function BucketList() {
 function ItemList({ artworks, onToggle }) {
   return (
     <ul>
-      {artworks.map(artwork => (
+      {artworks.map((artwork) => (
         <li key={artwork.id}>
           <label>
             <input
               type="checkbox"
               checked={artwork.seen}
-              onChange={e => {
-                onToggle(
-                  artwork.id,
-                  e.target.checked
-                );
+              onChange={(e) => {
+                onToggle(artwork.id, e.target.checked);
               }}
             />
             {artwork.title}

@@ -1,15 +1,10 @@
-// import Head from 'next/head'
-// import Image from 'next/image'
-// import { Inter } from 'next/font/google'
-
-import RequestTracker from "./qcomps/shoppingCart";
-import Gallery from "./qcomps/state";
-import Form from "./qcomps/stuckForm";
+import BucketList from "./qcomps/arrObj";
+import styles from '@/styles/Home.module.css'
 
 export default function Home() {
   return (
-    <div>
-      <RequestTracker />
+    <div className={styles.main}>
+      <BucketList />
     </div>
-  )
+  );
 }
